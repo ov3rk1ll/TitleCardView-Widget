@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleCardView">
+        <attr name="cardTitle" format="string" />
+        <attr name="cardTitleTextColor" format="color" />
+        <attr name="cardTitleBackgroundColor" format="color" />
+        <attr name="cardTitleHeight" format="dimension" />
+
+        <attr name="cardContentPadding" format="dimension"/>
+
+        <attr name="cardActionText" format="string"/>
+    </declare-styleable>
+</resources>

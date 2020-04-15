@@ -1,0 +1,3 @@
+rootProject.name='TitleCardView Demo'
+include ':app'
+include ':titlecardview'
