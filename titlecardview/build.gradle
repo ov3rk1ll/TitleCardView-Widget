@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 def versionMajor = 1 // 0-99
-def versionMinor = 0 // 0-99
+def versionMinor = 1 // 0-99
 def versionPatch = 0 // 0-99
 
 ext {
