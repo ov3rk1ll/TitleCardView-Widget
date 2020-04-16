@@ -4,7 +4,9 @@
 <img src="art/preview_action.png" width="200">
 
 ## Add the dependency
+Add the dependency for the AndroidX cardview and for this library
 ```
+implementation 'androidx.cardview:cardview:1.0.0'
 implementation 'dev.ov3rk1ll.widget:title-card-view:1.0.0'
 ```
 
