@@ -1,5 +1,8 @@
 # CardView with title bar
 
+<img src="art/preview.png" width="200">&nbsp;
+<img src="art/preview_action.png" width="200">
+
 ## Add the dependency
 ```
 implementation 'dev.ov3rk1ll.widget:title-card-view:1.0.0'
