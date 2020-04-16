@@ -7,12 +7,12 @@
     tools:context=".MainActivity">
 
     <dev.ov3rk1ll.widget.TitleCardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        app:cardActionText="Reset"
         app:cardElevation="4dp"
         app:cardTitle="Card title"
         app:layout_constraintEnd_toEndOf="parent"
