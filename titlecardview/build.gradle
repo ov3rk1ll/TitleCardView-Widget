@@ -1,7 +1,10 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+
 def versionMajor = 1 // 0-99
-def versionMinor = 1 // 0-99
+def versionMinor = 2 // 0-99
 def versionPatch = 0 // 0-99
 
 ext {
@@ -9,6 +12,7 @@ ext {
     PUBLISH_ARTIFACT_ID = 'title-card-view'
     PUBLISH_VERSION = "${versionMajor}.${versionMinor}.${versionPatch}"
 }
+
 
 android {
     compileSdkVersion 29
@@ -18,7 +22,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
-        versionName "1.0"
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -30,7 +34,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -44,4 +47,66 @@ dependencies {
 }
 
 
-apply from: '../android-release-aar.gradle'
+afterEvaluate {
+    bintray {
+        Properties localProperties = new Properties()
+        localProperties.load(new FileInputStream(project.rootProject.file('local.properties')))
+
+        user = localProperties.getProperty('bintrayUser') != null ? localProperties.getProperty('bintrayUser') : System.getenv('BINTRAY_USER')
+        key = localProperties.getProperty('bintrayApiKey') != null ? localProperties.getProperty('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+
+        pkg {
+            repo = 'ov3rk1ll'
+            name = 'TitleCardView-Widget'
+            userOrg = 'ov3rk1ll'
+            licenses = ['Apache-2.0']
+            desc = 'Add a title to a card'
+            websiteUrl = "https://github.com/ov3rk1ll/TitleCardView-Widget"
+            publish = true
+            version {
+                name = PUBLISH_VERSION
+            }
+        }
+        publications = ['release']
+    }
+
+    publishing {
+        repositories {
+            maven {
+                url = "$buildDir/repo"
+            }
+        }
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+
+                groupId = PUBLISH_GROUP_ID
+                artifactId = PUBLISH_ARTIFACT_ID
+                version = PUBLISH_VERSION
+
+                pom {
+                    name = 'CardView with title bar'
+                    description = 'Add a title to a card'
+                    url = 'https://github.com/ov3rk1ll/TitleCardView-Widget'
+                    inceptionYear = '2020'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'ov3rk1ll'
+                            name = 'Stephan Gruber'
+                            email = 'overkillerror@gmail.com'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
